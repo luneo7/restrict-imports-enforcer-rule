@@ -71,12 +71,12 @@ final class ImportStatementParserImpl implements ImportStatementParser {
                 }
 
                 final List<ImportStatement> importStatements = languageSupport.parseImport(line, row);
-                if (importStatements.isEmpty()) {
+                if (!importStatements.isEmpty()) {
                     // as we are skipping empty (and comment) lines, by the time we
                     // encounter a non-import line we can stop processing this file
-                    break;
+                    imports.addAll(importStatements);
                 }
-                imports.addAll(importStatements);
+
             }
 
             return new ParsedFile(sourceFilePath, packageName, fqcn, imports);
